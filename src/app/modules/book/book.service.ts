@@ -8,6 +8,12 @@ const createBookIntoDb = async (bookData: IBook): Promise<Book> => {
   return result;
 };
 
+const getAllBookFromDb = async (): Promise<Book[]> => {
+  const result = await prisma.book.findMany();
+  return result;
+};
+
 export const BookService = {
   createBookIntoDb,
+  getAllBookFromDb,
 };
