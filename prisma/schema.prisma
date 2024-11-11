@@ -30,7 +30,7 @@ model Member {
   name          String
   email         String   @unique
   phone         String
-  membershipDate DateTime
+  membershipDate DateTime @default(now())
    borrowRecords BorrowRecord[]
 }
 

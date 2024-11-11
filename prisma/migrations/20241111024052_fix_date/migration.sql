@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Member" ALTER COLUMN "membershipDate" SET DEFAULT CURRENT_TIMESTAMP;
