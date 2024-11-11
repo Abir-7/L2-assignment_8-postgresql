@@ -43,4 +43,8 @@ const deleteMemberFromDb = async (id: string): Promise<Member> => {
 
 export const MemberService = {
   createMemberIntoDb,
+  getAllMembersFromDb,
+  getSingleMemberFromDb,
+  updateMemberFromDb,
+  deleteMemberFromDb,
 };

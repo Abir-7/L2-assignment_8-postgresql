@@ -12,11 +12,13 @@ interface IResponse<T> {
   message: string;
   meta?: IMeta;
   data: T;
+  success: boolean;
 }
 
 const sendResponse = <T>(res: Response, dataInfo: IResponse<T>) => {
   return res.status(dataInfo.statusCode).json({
-    status: "success",
+    success: dataInfo.success,
+    status: dataInfo.statusCode,
     message: dataInfo.message,
     data: dataInfo.data,
     meta: dataInfo?.meta,
