@@ -24,8 +24,8 @@ const getAllBook = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getSingleBook = catchAsync(async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const result = await BookService.getSingleBookFromDb(id);
+  const { bookId } = req.params;
+  const result = await BookService.getSingleBookFromDb(bookId);
   sendResponse(res, {
     data: result,
     statusCode: httpStatus.OK,
@@ -34,9 +34,9 @@ const getSingleBook = catchAsync(async (req: Request, res: Response) => {
 });
 
 const updateSingleBook = catchAsync(async (req: Request, res: Response) => {
-  const { id } = req.params;
+  const { bookId } = req.params;
   const data = req.body;
-  const result = await BookService.updateSingleBookFromDb(id, data);
+  const result = await BookService.updateSingleBookFromDb(bookId, data);
   sendResponse(res, {
     data: result,
     statusCode: httpStatus.OK,
@@ -45,8 +45,8 @@ const updateSingleBook = catchAsync(async (req: Request, res: Response) => {
 });
 
 const deleteSingleBook = catchAsync(async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const result = await BookService.deleteSingleBookFromDb(id);
+  const { bookId } = req.params;
+  const result = await BookService.deleteSingleBookFromDb(bookId);
   sendResponse(res, {
     data: result,
     statusCode: httpStatus.OK,
