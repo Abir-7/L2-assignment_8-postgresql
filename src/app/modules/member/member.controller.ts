@@ -30,21 +30,12 @@ const getSingleMember = catchAsync(async (req: Request, res: Response) => {
   const { memberId } = req.params;
   const member = await MemberService.getSingleMemberFromDb(memberId);
 
-  if (!member) {
-    sendResponse(res, {
-      success: true,
-      data: null,
-      statusCode: httpStatus.NOT_FOUND,
-      message: "Member not found",
-    });
-  } else {
-    sendResponse(res, {
-      success: true,
-      data: member,
-      statusCode: httpStatus.OK,
-      message: "Member retrieved successfully",
-    });
-  }
+  sendResponse(res, {
+    success: true,
+    data: member,
+    statusCode: httpStatus.OK,
+    message: "Member retrieved successfully",
+  });
 });
 
 // Update a member by ID
@@ -55,42 +46,23 @@ const updateMember = catchAsync(async (req: Request, res: Response) => {
     req.body
   );
 
-  if (!updatedMember) {
-    sendResponse(res, {
-      success: true,
-      data: null,
-      statusCode: httpStatus.NOT_FOUND,
-      message: "Member not found",
-    });
-  } else {
-    sendResponse(res, {
-      success: true,
-      data: updatedMember,
-      statusCode: httpStatus.OK,
-      message: "Member updated successfully",
-    });
-  }
+  sendResponse(res, {
+    success: true,
+    data: updatedMember,
+    statusCode: httpStatus.OK,
+    message: "Member updated successfully",
+  });
 });
 // Delete a member by ID
 const deleteMember = catchAsync(async (req: Request, res: Response) => {
   const { memberId } = req.params;
-  const deletedMember = await MemberService.deleteMemberFromDb(memberId);
+  await MemberService.deleteMemberFromDb(memberId);
 
-  if (!deletedMember) {
-    sendResponse(res, {
-      success: true,
-      data: null,
-      statusCode: httpStatus.NOT_FOUND,
-      message: "Member not found",
-    });
-  } else {
-    sendResponse(res, {
-      success: true,
-      data: deletedMember,
-      statusCode: httpStatus.OK,
-      message: "Member deleted successfully",
-    });
-  }
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Member deleted successfully",
+  });
 });
 
 export const MemberController = {

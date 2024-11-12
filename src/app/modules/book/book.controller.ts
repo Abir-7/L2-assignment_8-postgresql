@@ -11,7 +11,7 @@ const createBook = catchAsync(async (req: Request, res: Response) => {
     success: true,
     data: result,
     statusCode: httpStatus.OK,
-    message: "Book added successfuly",
+    message: "Book created successfully",
   });
 });
 
@@ -21,7 +21,7 @@ const getAllBook = catchAsync(async (req: Request, res: Response) => {
     success: true,
     data: result,
     statusCode: httpStatus.OK,
-    message: "All Books are retrives successfuly",
+    message: "Books retrieved successfully",
   });
 });
 
@@ -32,7 +32,7 @@ const getSingleBook = catchAsync(async (req: Request, res: Response) => {
     success: true,
     data: result,
     statusCode: httpStatus.OK,
-    message: "Book data is retrives successfuly",
+    message: "Book retrieved successfully",
   });
 });
 
@@ -44,18 +44,17 @@ const updateSingleBook = catchAsync(async (req: Request, res: Response) => {
     success: true,
     data: result,
     statusCode: httpStatus.OK,
-    message: "Book is updated successfuly",
+    message: "Book updated successfully",
   });
 });
 
 const deleteSingleBook = catchAsync(async (req: Request, res: Response) => {
   const { bookId } = req.params;
-  const result = await BookService.deleteSingleBookFromDb(bookId);
+  await BookService.deleteSingleBookFromDb(bookId);
   sendResponse(res, {
     success: true,
-    data: result,
     statusCode: httpStatus.OK,
-    message: "Book data is deleted successfuly",
+    message: "Book successfully deleted",
   });
 });
 

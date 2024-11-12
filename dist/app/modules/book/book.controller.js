@@ -23,7 +23,7 @@ const createBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
         success: true,
         data: result,
         statusCode: http_status_codes_1.default.OK,
-        message: "Book added successfuly",
+        message: "Book created successfully",
     });
 }));
 const getAllBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -32,7 +32,7 @@ const getAllBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
         success: true,
         data: result,
         statusCode: http_status_codes_1.default.OK,
-        message: "All Books are retrives successfuly",
+        message: "Books retrieved successfully",
     });
 }));
 const getSingleBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -42,7 +42,7 @@ const getSingleBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
         success: true,
         data: result,
         statusCode: http_status_codes_1.default.OK,
-        message: "Book data is retrives successfuly",
+        message: "Book retrieved successfully",
     });
 }));
 const updateSingleBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -53,17 +53,16 @@ const updateSingleBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 
         success: true,
         data: result,
         statusCode: http_status_codes_1.default.OK,
-        message: "Book is updated successfuly",
+        message: "Book updated successfully",
     });
 }));
 const deleteSingleBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { bookId } = req.params;
-    const result = yield book_service_1.BookService.deleteSingleBookFromDb(bookId);
+    yield book_service_1.BookService.deleteSingleBookFromDb(bookId);
     (0, sendResponse_1.default)(res, {
         success: true,
-        data: result,
         statusCode: http_status_codes_1.default.OK,
-        message: "Book data is deleted successfuly",
+        message: "Book successfully deleted",
     });
 }));
 exports.BookController = {

@@ -15,6 +15,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookService = void 0;
 const prisma_1 = __importDefault(require("../../client/prisma"));
 const createBookIntoDb = (bookData) => __awaiter(void 0, void 0, void 0, function* () {
+    const existingBook = yield prisma_1.default.book.findFirst({
+        where: {
+            title: {
+                equals: bookData.title,
+                mode: "insensitive",
+            },
+        },
+    });
+    if (existingBook) {
+        throw new Error("Book title already exists.");
+    }
     const result = yield prisma_1.default.book.create({ data: bookData });
     return result;
 });
@@ -36,8 +47,13 @@ const updateSingleBookFromDb = (id, data) => __awaiter(void 0, void 0, void 0, f
     return result;
 });
 const deleteSingleBookFromDb = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield prisma_1.default.book.delete({ where: { bookId: id } });
-    console.log(result);
+    const result = yield prisma_1.default.$transaction((prisma) => __awaiter(void 0, void 0, void 0, function* () {
+        yield prisma.borrowRecord.deleteMany({ where: { bookId: id } });
+        const deletedBook = yield prisma.book.delete({
+            where: { bookId: id },
+        });
+        return deletedBook;
+    }));
     return result;
 });
 exports.BookService = {

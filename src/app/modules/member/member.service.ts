@@ -25,10 +25,16 @@ const getSingleMemberFromDb = async (id: string): Promise<Member | null> => {
 const updateMemberFromDb = async (
   id: string,
   memberData: IMember
-): Promise<Member> => {
+): Promise<Partial<Member>> => {
   const updatedMember = await prisma.member.update({
     where: { memberId: id },
     data: memberData,
+    select: {
+      memberId: true,
+      name: true,
+      email: true,
+      phone: true,
+    },
   });
   return updatedMember;
 };

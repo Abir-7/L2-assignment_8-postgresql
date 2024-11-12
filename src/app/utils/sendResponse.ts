@@ -11,7 +11,7 @@ interface IResponse<T> {
   statusCode: number;
   message: string;
   meta?: IMeta;
-  data: T;
+  data?: T;
   success: boolean;
 }
 

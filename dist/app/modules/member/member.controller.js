@@ -40,64 +40,33 @@ const getAllMembers = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
 const getSingleMember = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { memberId } = req.params;
     const member = yield member_service_1.MemberService.getSingleMemberFromDb(memberId);
-    if (!member) {
-        (0, sendResponse_1.default)(res, {
-            success: true,
-            data: null,
-            statusCode: http_status_codes_1.default.NOT_FOUND,
-            message: "Member not found",
-        });
-    }
-    else {
-        (0, sendResponse_1.default)(res, {
-            success: true,
-            data: member,
-            statusCode: http_status_codes_1.default.OK,
-            message: "Member retrieved successfully",
-        });
-    }
+    (0, sendResponse_1.default)(res, {
+        success: true,
+        data: member,
+        statusCode: http_status_codes_1.default.OK,
+        message: "Member retrieved successfully",
+    });
 }));
 // Update a member by ID
 const updateMember = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { memberId } = req.params;
     const updatedMember = yield member_service_1.MemberService.updateMemberFromDb(memberId, req.body);
-    if (!updatedMember) {
-        (0, sendResponse_1.default)(res, {
-            success: true,
-            data: null,
-            statusCode: http_status_codes_1.default.NOT_FOUND,
-            message: "Member not found",
-        });
-    }
-    else {
-        (0, sendResponse_1.default)(res, {
-            success: true,
-            data: updatedMember,
-            statusCode: http_status_codes_1.default.OK,
-            message: "Member updated successfully",
-        });
-    }
+    (0, sendResponse_1.default)(res, {
+        success: true,
+        data: updatedMember,
+        statusCode: http_status_codes_1.default.OK,
+        message: "Member updated successfully",
+    });
 }));
 // Delete a member by ID
 const deleteMember = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { memberId } = req.params;
-    const deletedMember = yield member_service_1.MemberService.deleteMemberFromDb(memberId);
-    if (!deletedMember) {
-        (0, sendResponse_1.default)(res, {
-            success: true,
-            data: null,
-            statusCode: http_status_codes_1.default.NOT_FOUND,
-            message: "Member not found",
-        });
-    }
-    else {
-        (0, sendResponse_1.default)(res, {
-            success: true,
-            data: deletedMember,
-            statusCode: http_status_codes_1.default.OK,
-            message: "Member deleted successfully",
-        });
-    }
+    yield member_service_1.MemberService.deleteMemberFromDb(memberId);
+    (0, sendResponse_1.default)(res, {
+        success: true,
+        statusCode: http_status_codes_1.default.OK,
+        message: "Member deleted successfully",
+    });
 }));
 exports.MemberController = {
     createMember,
