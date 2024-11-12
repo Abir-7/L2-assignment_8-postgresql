@@ -34,3 +34,6 @@ Follow these steps to get the project up and running on your local machine:
    npm run start:dev
    
 2. **Make .env file**
+   ```bash
+   PORT=add your port
+   DATABASE_URL= your database url
