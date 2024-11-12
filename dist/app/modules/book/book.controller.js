@@ -22,7 +22,7 @@ const createBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
     (0, sendResponse_1.default)(res, {
         success: true,
         data: result,
-        statusCode: http_status_codes_1.default.OK,
+        statusCode: http_status_codes_1.default.CREATED,
         message: "Book created successfully",
     });
 }));

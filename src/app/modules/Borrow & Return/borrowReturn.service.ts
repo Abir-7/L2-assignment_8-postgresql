@@ -4,8 +4,28 @@ import prisma from "../../client/prisma";
 const borrowBookInfoSaveIntoDb = async (data: {
   bookId: string;
   memberId: string;
-}): Promise<BorrowRecord> => {
-  const result = await prisma.borrowRecord.create({ data });
+}): Promise<Partial<BorrowRecord>> => {
+  const isAlreadyTeken = await prisma.borrowRecord.findMany({
+    where: {
+      AND: [
+        { returnDate: null },
+        { bookId: data.bookId },
+        { memberId: data.memberId },
+      ],
+    },
+  });
+  if (isAlreadyTeken.length > 0) {
+    throw new Error("This user not returned this book yet.");
+  }
+  const result = await prisma.borrowRecord.create({
+    data,
+    select: {
+      borrowId: true,
+      bookId: true,
+      memberId: true,
+      borrowDate: true,
+    },
+  });
   return result;
 };
 

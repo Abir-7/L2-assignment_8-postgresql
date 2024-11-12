@@ -15,7 +15,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BorrowReturnService = void 0;
 const prisma_1 = __importDefault(require("../../client/prisma"));
 const borrowBookInfoSaveIntoDb = (data) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield prisma_1.default.borrowRecord.create({ data });
+    const isAlreadyTeken = yield prisma_1.default.borrowRecord.findMany({
+        where: {
+            AND: [
+                { returnDate: null },
+                { bookId: data.bookId },
+                { memberId: data.memberId },
+            ],
+        },
+    });
+    if (isAlreadyTeken.length > 0) {
+        throw new Error("This user not returned this book yet.");
+    }
+    const result = yield prisma_1.default.borrowRecord.create({
+        data,
+        select: {
+            borrowId: true,
+            bookId: true,
+            memberId: true,
+            borrowDate: true,
+        },
+    });
     return result;
 });
 const returnBookInfoSaveIntoDb = (data) => __awaiter(void 0, void 0, void 0, function* () {

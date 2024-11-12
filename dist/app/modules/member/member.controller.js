@@ -32,7 +32,7 @@ const getAllMembers = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
     (0, sendResponse_1.default)(res, {
         success: true,
         data: members,
-        statusCode: http_status_codes_1.default.OK,
+        statusCode: http_status_codes_1.default.CREATED,
         message: "Members retrieved successfully",
     });
 }));
@@ -65,7 +65,7 @@ const deleteMember = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, v
     (0, sendResponse_1.default)(res, {
         success: true,
         statusCode: http_status_codes_1.default.OK,
-        message: "Member deleted successfully",
+        message: "Member successfully deleted",
     });
 }));
 exports.MemberController = {

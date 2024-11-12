@@ -20,7 +20,7 @@ const getAllMembers = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     success: true,
     data: members,
-    statusCode: httpStatus.OK,
+    statusCode: httpStatus.CREATED,
     message: "Members retrieved successfully",
   });
 });
@@ -61,7 +61,7 @@ const deleteMember = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
-    message: "Member deleted successfully",
+    message: "Member successfully deleted",
   });
 });
 
