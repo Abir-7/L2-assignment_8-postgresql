@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "ts-node-dev --respawn --transpile-only ./src/server.ts"
+    "start:dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
+    "build": "tsc",
+     "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +26,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "http-status-codes": "^2.3.0",
-    "ts-node-dev": "^2.0.0"
+    "ts-node-dev": "^2.0.0",
+    "vercel": "^37.14.0"
   }
 }

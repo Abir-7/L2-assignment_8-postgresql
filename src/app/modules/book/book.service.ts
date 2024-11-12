@@ -4,6 +4,19 @@ import prisma from "../../client/prisma";
 import { IBook } from "./book.interface";
 
 const createBookIntoDb = async (bookData: IBook): Promise<Book> => {
+  const existingBook = await prisma.book.findFirst({
+    where: {
+      title: {
+        equals: bookData.title,
+        mode: "insensitive",
+      },
+    },
+  });
+
+  if (existingBook) {
+    throw new Error("Book title already exists.");
+  }
+
   const result = await prisma.book.create({ data: bookData });
   return result;
 };
@@ -32,8 +45,13 @@ const updateSingleBookFromDb = async (
 };
 
 const deleteSingleBookFromDb = async (id: string): Promise<Book> => {
-  const result = await prisma.book.delete({ where: { bookId: id } });
-  console.log(result);
+  const result = await prisma.$transaction(async (prisma) => {
+    await prisma.borrowRecord.deleteMany({ where: { bookId: id } });
+    const deletedBook = await prisma.book.delete({
+      where: { bookId: id },
+    });
+    return deletedBook;
+  });
   return result;
 };
 

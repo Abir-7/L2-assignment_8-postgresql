@@ -35,10 +35,14 @@ const updateMemberFromDb = async (
 
 // Delete a member by ID
 const deleteMemberFromDb = async (id: string): Promise<Member> => {
-  const deletedMember = await prisma.member.delete({
-    where: { memberId: id },
+  const result = await prisma.$transaction(async (prisma) => {
+    await prisma.borrowRecord.deleteMany({ where: { memberId: id } });
+    const deletedMember = await prisma.member.delete({
+      where: { memberId: id },
+    });
+    return deletedMember;
   });
-  return deletedMember;
+  return result;
 };
 
 export const MemberService = {

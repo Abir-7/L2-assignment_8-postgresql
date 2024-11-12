@@ -25,7 +25,27 @@ const returnBook = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const overdueBook = catchAsync(async (req: Request, res: Response) => {
+  const result = await BorrowReturnService.overdueBooksFromDb();
+  if (result.length > 0) {
+    sendResponse(res, {
+      success: true,
+      data: result,
+      statusCode: httpStatus.OK,
+      message: "Overdue borrow list fetched",
+    });
+  } else {
+    sendResponse(res, {
+      success: true,
+      data: [],
+      statusCode: httpStatus.OK,
+      message: "No overdue books",
+    });
+  }
+});
+
 export const BorrowReturnController = {
   borrowBook,
   returnBook,
+  overdueBook,
 };
