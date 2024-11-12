@@ -9,7 +9,7 @@ const createMember = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     success: true,
     data: result,
-    statusCode: httpStatus.OK,
+    statusCode: httpStatus.CREATED,
     message: "Member created successfuly",
   });
 });
@@ -20,7 +20,7 @@ const getAllMembers = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     success: true,
     data: members,
-    statusCode: httpStatus.CREATED,
+    statusCode: httpStatus.OK,
     message: "Members retrieved successfully",
   });
 });
