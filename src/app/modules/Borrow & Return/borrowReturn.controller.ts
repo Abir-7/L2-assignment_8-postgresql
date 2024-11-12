@@ -16,10 +16,9 @@ const borrowBook = catchAsync(async (req: Request, res: Response) => {
 
 const returnBook = catchAsync(async (req: Request, res: Response) => {
   const data = req.body;
-  const result = await BorrowReturnService.returnBookInfoSaveIntoDb(data);
+  await BorrowReturnService.returnBookInfoSaveIntoDb(data);
   sendResponse(res, {
     success: true,
-    data: result,
     statusCode: httpStatus.OK,
     message: "Book returned successfully",
   });

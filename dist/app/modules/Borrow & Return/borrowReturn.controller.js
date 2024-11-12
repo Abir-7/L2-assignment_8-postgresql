@@ -29,10 +29,9 @@ const borrowBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
 }));
 const returnBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const data = req.body;
-    const result = yield borrowReturn_service_1.BorrowReturnService.returnBookInfoSaveIntoDb(data);
+    yield borrowReturn_service_1.BorrowReturnService.returnBookInfoSaveIntoDb(data);
     (0, sendResponse_1.default)(res, {
         success: true,
-        data: result,
         statusCode: http_status_codes_1.default.OK,
         message: "Book returned successfully",
     });
